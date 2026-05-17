@@ -2,36 +2,32 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  try {
+    const { pathname } = request.nextUrl
 
-  const protectedRoutes = [
-    '/dashboard',
-    '/wedding'
-  ]
+    if (!pathname.startsWith('/dashboard')) {
+      return NextResponse.next()
+    }
 
-  const isProtected = protectedRoutes.some(
-    route => pathname.startsWith(route)
-  )
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    if (!supabaseUrl || supabaseUrl === 'placeholder') {
+      return NextResponse.next()
+    }
 
-  if (!isProtected) {
+    const authCookie =
+      request.cookies.get('sb-access-token')?.value ||
+      request.cookies.get('sb-refresh-token')?.value
+
+    if (!authCookie) {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
+
+    return NextResponse.next()
+  } catch {
     return NextResponse.next()
   }
-
-  const token =
-    request.cookies.get('sb-access-token')?.value
-
-  if (!token) {
-    return NextResponse.redirect(
-      new URL('/login', request.url)
-    )
-  }
-
-  return NextResponse.next()
 }
 
 export const config = {
-  matcher: [
-    '/dashboard/:path*',
-    '/wedding/:path*'
-  ]
+  matcher: ['/dashboard/:path*']
 }
