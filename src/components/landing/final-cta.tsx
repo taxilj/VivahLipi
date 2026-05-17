@@ -42,7 +42,7 @@ export function FinalCTA() {
               ✦ Create Your Biodata Now
             </Button>
             <p className="text-white/50 text-xs mt-5">
-              No credit card required · One-time payment · Lifetime access
+              One-time payment · Lifetime access
             </p>
           </div>
         </motion.div>

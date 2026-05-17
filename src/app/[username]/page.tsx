@@ -1,5 +1,14 @@
 import Link from "next/link"
+import type { Metadata } from "next"
 import { Ornament } from "@/components/shared/ornament"
+
+export function generateMetadata({ params }: { params: { username: string } }): Metadata {
+  return {
+    title: `${params.username} | VivahLipi`,
+    description: `View ${params.username}'s wedding biodata profile on VivahLipi.`,
+    robots: { index: false, follow: true },
+  }
+}
 
 export default function UsernamePage({ params }: { params: { username: string } }) {
   return (

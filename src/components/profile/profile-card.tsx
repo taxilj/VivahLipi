@@ -151,7 +151,7 @@ export function ProfileCard({ data = defaultProfile, username }: ProfileCardProp
           <p className="text-xs text-white/65 mb-4 leading-relaxed">
             Create your own beautiful biodata
             <br />
-            Join 12,000+ profiles
+            Share it with your family
           </p>
           <div className="inline-block bg-white rounded-full px-6 py-2.5 text-sm font-bold text-saffron">
             {username ? `vivahlipi.in/${username}` : "Create your own &rarr; vivahlipi.in"}
