@@ -61,7 +61,7 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mb-8">
-              <Button size="xl" className="text-base" onClick={() => scrollTo("pricing")}>
+              <Button size="xl" className="text-base" onClick={() => window.location.href = "/create"}>
                 ✦ Get Started Free
               </Button>
               <Button variant="outline" size="lg" onClick={() => scrollTo("preview")}>
@@ -138,7 +138,7 @@ export function Hero() {
                 className="absolute -bottom-4 -right-8 bg-white border border-gold/40 rounded-xl px-4 py-2.5 shadow-elevated"
               >
                 <span className="text-sm font-semibold text-charcoal">
-                  <span className="text-gold">★ 4.9</span> · 12k+ profiles
+                  <span className="text-gold">500+</span> profiles created
                 </span>
               </motion.div>
             </div>

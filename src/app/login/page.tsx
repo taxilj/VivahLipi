@@ -80,8 +80,8 @@ export default function LoginPage() {
 
         <p className="text-xs text-muted text-center mt-6">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="text-saffron font-semibold hover:underline">
-            Sign up
+          <Link href="/create" className="text-saffron font-semibold hover:underline">
+            Create one
           </Link>
         </p>
       </div>

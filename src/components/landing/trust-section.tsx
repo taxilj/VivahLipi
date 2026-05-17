@@ -4,25 +4,9 @@ import { motion } from "framer-motion"
 import { Ornament } from "@/components/shared/ornament"
 
 const stats = [
-  { value: "12,000+", label: "Profiles Created" },
-  { value: "4.9 ★", label: "User Rating" },
+  { value: "500+", label: "Profiles Created" },
   { value: "99.9%", label: "Uptime" },
   { value: "5 min", label: "Average Setup" },
-]
-
-const testimonials = [
-  {
-    quote:
-      "VivahLipi made my shaadi profile look like a million bucks. My family was blown away when they saw it.",
-    author: "Priya S.",
-    role: "Premium User · Delhi",
-  },
-  {
-    quote:
-      "The wedding planner saved us so much stress. Guest list, menu, timeline — all in one place. Game changer!",
-    author: "Raj & Anjali",
-    role: "Wedding Planner Users · Mumbai",
-  },
 ]
 
 export function TrustSection() {
@@ -36,7 +20,7 @@ export function TrustSection() {
       </div>
 
       {/* Stats */}
-      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+      <div className="max-w-3xl mx-auto grid grid-cols-3 gap-6 mb-20">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -54,33 +38,27 @@ export function TrustSection() {
         ))}
       </div>
 
-      {/* Testimonials */}
-      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
-        {testimonials.map((t, i) => (
-          <motion.div
-            key={t.author}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="bg-white border border-gold/30 rounded-3xl p-8 relative"
-          >
-            <div className="absolute top-4 right-4 opacity-[0.06]">
-              <Ornament color="#D4AF37" size={40} />
-            </div>
-            <div className="text-3xl text-gold/30 font-serif leading-none mb-4">
-              &ldquo;
-            </div>
-            <p className="text-sm text-charcoal/80 leading-relaxed mb-6">
-              {t.quote}
-            </p>
-            <div>
-              <div className="text-sm font-semibold text-charcoal">{t.author}</div>
-              <div className="text-xs text-muted mt-0.5">{t.role}</div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      {/* Placeholder CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="max-w-lg mx-auto text-center bg-white border border-gold/30 rounded-3xl p-10"
+      >
+        <div className="text-4xl mb-4">💍</div>
+        <p className="text-lg font-serif font-bold text-charcoal mb-3">
+          Be the first to create your VivahLipi profile
+        </p>
+        <p className="text-sm text-muted mb-6">
+          Join 500+ families who trust VivahLipi. Your story starts here.
+        </p>
+        <button
+          onClick={() => window.location.href = "/create"}
+          className="inline-flex items-center justify-center rounded-full bg-saffron text-white font-semibold px-8 py-3 text-sm hover:bg-saffron-dark transition-all shadow-[0_12px_36px_rgba(171,53,0,0.25)]"
+        >
+          Create Now
+        </button>
+      </motion.div>
     </section>
   )
 }

@@ -97,7 +97,7 @@ export function Navbar() {
               >
                 Login
               </Link>
-              <Link href="/signup" passHref legacyBehavior>
+              <Link href="/create" passHref legacyBehavior>
                 <Button asChild size="md">
                   <a>Create Biodata</a>
                 </Button>
@@ -162,7 +162,7 @@ export function Navbar() {
                   >
                     Login
                   </Link>
-                  <Link href="/signup" passHref legacyBehavior>
+                  <Link href="/create" passHref legacyBehavior>
                     <Button asChild size="lg" className="w-full">
                       <a onClick={() => setOpen(false)}>Create Biodata</a>
                     </Button>

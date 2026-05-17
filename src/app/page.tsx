@@ -1,5 +1,6 @@
 "use client"
 
+import { SeasonalBanner } from "@/components/landing/seasonal-banner"
 import { Navbar } from "@/components/shared/navbar"
 import { Footer } from "@/components/shared/footer"
 import { Hero } from "@/components/landing/hero"
@@ -17,6 +18,7 @@ import { ProfileCard } from "@/components/profile/profile-card"
 export default function Home() {
   return (
     <>
+      <SeasonalBanner />
       <Navbar />
       <main>
         <Hero />

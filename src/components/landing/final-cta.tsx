@@ -31,14 +31,13 @@ export function FinalCTA() {
               <span className="text-gold">a Beautiful Beginning</span>
             </h2>
             <p className="text-white/65 text-base md:text-lg max-w-md mx-auto leading-relaxed mb-10">
-              Join 12,000+ families who trust VivahLipi. Create your premium
-              biodata in minutes, share it with the world.
+              Create your premium biodata in minutes, share it with the world.
             </p>
             <Button
               variant="gold"
               size="xl"
               className="text-base"
-              onClick={() => window.location.href = "/signup"}
+              onClick={() => window.location.href = "/create"}
             >
               ✦ Create Your Biodata Now
             </Button>

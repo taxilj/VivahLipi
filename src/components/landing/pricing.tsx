@@ -116,7 +116,7 @@ export function Pricing() {
               variant={plan.hot ? "gold" : "primary"}
               size="lg"
               className="w-full"
-              onClick={() => window.location.href = "/signup"}
+              onClick={() => window.location.href = "/create"}
             >
               Get Started &rarr;
             </Button>

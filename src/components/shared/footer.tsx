@@ -5,26 +5,15 @@ const footerLinks = [
   {
     title: "Product",
     links: [
-      { label: "Biodata", href: "/signup" },
-      { label: "Wedding Planner", href: "/wedding-planner" },
+      { label: "Biodata", href: "/create" },
       { label: "Pricing", href: "/#pricing" },
-      { label: "Templates", href: "/templates" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About Us", href: "/about" },
-      { label: "Blog", href: "/blog" },
-      { label: "Careers", href: "/careers" },
     ],
   },
   {
     title: "Support",
     links: [
-      { label: "Help Centre", href: "/help" },
-      { label: "WhatsApp", href: "https://wa.me/919876543210" },
       { label: "Privacy Policy", href: "/privacy" },
+      { label: "Email Us", href: "mailto:hello@vivahlipi.in" },
     ],
   },
 ]
