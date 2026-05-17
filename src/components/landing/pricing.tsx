@@ -100,9 +100,7 @@ export function Pricing() {
             <div className="flex flex-col gap-3 mb-8">
               {plan.features.map((f) => (
                 <div key={f} className="flex gap-2.5 items-start">
-                  <span className="text-gold text-xs mt-0.5 flex-shrink-0">
-                    ✦
-                  </span>
+                  <span className="text-gold text-xs mt-0.5 flex-shrink-0">✦</span>
                   <span
                     className={`text-sm leading-relaxed ${
                       plan.hot ? "text-white/85" : "text-charcoal"
@@ -118,6 +116,7 @@ export function Pricing() {
               variant={plan.hot ? "gold" : "primary"}
               size="lg"
               className="w-full"
+              onClick={() => window.location.href = "/signup"}
             >
               Get Started &rarr;
             </Button>

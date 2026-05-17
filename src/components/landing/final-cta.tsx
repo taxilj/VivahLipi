@@ -34,7 +34,12 @@ export function FinalCTA() {
               Join 12,000+ families who trust VivahLipi. Create your premium
               biodata in minutes, share it with the world.
             </p>
-            <Button variant="gold" size="xl" className="text-base">
+            <Button
+              variant="gold"
+              size="xl"
+              className="text-base"
+              onClick={() => window.location.href = "/signup"}
+            >
               ✦ Create Your Biodata Now
             </Button>
             <p className="text-white/50 text-xs mt-5">

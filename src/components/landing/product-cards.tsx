@@ -12,6 +12,7 @@ const cards = [
     cta: "Create Biodata →",
     price: "from ₹499",
     saffron: false,
+    href: "/signup",
   },
   {
     icon: "🎊",
@@ -20,6 +21,7 @@ const cards = [
     cta: "Plan Wedding →",
     price: null,
     saffron: true,
+    href: "/wedding-planner",
   },
 ]
 
@@ -62,6 +64,7 @@ export function ProductCards() {
               <Button
                 variant={card.saffron ? "gold" : "primary"}
                 size="md"
+                onClick={() => window.location.href = card.href}
               >
                 {card.cta}
               </Button>

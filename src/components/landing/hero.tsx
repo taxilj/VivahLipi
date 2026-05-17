@@ -5,9 +5,12 @@ import { Button } from "@/components/ui/button"
 import { Ornament } from "@/components/shared/ornament"
 
 export function Hero() {
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-cream pt-24 md:pt-0">
-      {/* Background ornament decorations */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-12 left-12 opacity-10">
           <Ornament color="#D4AF37" size={64} />
@@ -30,7 +33,6 @@ export function Hero() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-          {/* Left content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -59,10 +61,10 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mb-8">
-              <Button size="xl" className="text-base">
+              <Button size="xl" className="text-base" onClick={() => scrollTo("pricing")}>
                 ✦ Get Started Free
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={() => scrollTo("preview")}>
                 View Sample &rarr;
               </Button>
             </div>
@@ -78,7 +80,6 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Right - Phone mockup */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -89,7 +90,6 @@ export function Hero() {
               <div className="relative bg-[#18110a] rounded-[44px] p-[10px] shadow-[0_48px_110px_rgba(24,17,10,0.35),0_0_0_1.5px_rgba(212,175,55,0.15)]">
                 <div className="absolute top-[14px] left-1/2 -translate-x-1/2 w-[64px] h-[11px] bg-[#18110a] rounded-full z-10" />
                 <div className="w-full rounded-[35px] overflow-hidden bg-cream">
-                  {/* Profile preview */}
                   <div className="h-[160px] relative">
                     <div
                       className="w-full h-full bg-cover bg-center"
@@ -132,7 +132,6 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Rating badge */}
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

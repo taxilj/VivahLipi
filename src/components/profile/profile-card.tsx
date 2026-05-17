@@ -48,6 +48,10 @@ interface ProfileCardProps {
   username?: string
 }
 
+const WA_SHARE_TEXT = encodeURIComponent(
+  "Check out my premium wedding biodata on VivahLipi! https://vivahlipi.in"
+)
+
 export function ProfileCard({ data = defaultProfile, username }: ProfileCardProps) {
   const sections = [
     { title: "Personal", rows: Object.entries(data.personal) },
@@ -55,9 +59,15 @@ export function ProfileCard({ data = defaultProfile, username }: ProfileCardProp
     { title: "Family", rows: Object.entries(data.family) },
   ]
 
+  const handleWhatsApp = () => window.open(`https://wa.me/?text=${WA_SHARE_TEXT}`, "_blank")
+
+  const handleCopyProfileLink = () => {
+    const link = username ? `https://vivahlipi.in/${username}` : "https://vivahlipi.in"
+    navigator.clipboard.writeText(link).then(() => alert("Profile link copied!"))
+  }
+
   return (
     <div className="font-sans bg-cream min-h-screen relative">
-      {/* Hero */}
       <div className="h-[300px] relative overflow-hidden">
         <div
           className="w-full h-full bg-cover bg-center"
@@ -88,7 +98,6 @@ export function ProfileCard({ data = defaultProfile, username }: ProfileCardProp
         </div>
       </div>
 
-      {/* Content */}
       <div className="px-5 py-6 max-w-lg mx-auto flex flex-col gap-4">
         {sections.map((section, i) => (
           <motion.div
@@ -120,12 +129,12 @@ export function ProfileCard({ data = defaultProfile, username }: ProfileCardProp
           </motion.div>
         ))}
 
-        {/* Made with VivahLipi */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-gradient-saffron rounded-2xl p-6 text-center relative overflow-hidden"
+          className="bg-gradient-saffron rounded-2xl p-6 text-center relative overflow-hidden cursor-pointer"
+          onClick={handleCopyProfileLink}
         >
           <div className="absolute -right-5 -bottom-5 opacity-10 pointer-events-none">
             <Ornament color="#D4AF37" size={90} />
@@ -152,9 +161,13 @@ export function ProfileCard({ data = defaultProfile, username }: ProfileCardProp
         <div className="h-4" />
       </div>
 
-      {/* Sticky WhatsApp CTA */}
       <div className="sticky bottom-4 mx-4 max-w-lg lg:mx-auto">
-        <Button variant="wa" size="lg" className="w-full shadow-[0_10px_32px_rgba(37,211,102,0.42)]">
+        <Button
+          variant="wa"
+          size="lg"
+          className="w-full shadow-[0_10px_32px_rgba(37,211,102,0.42)]"
+          onClick={handleWhatsApp}
+        >
           💬 Connect on WhatsApp
         </Button>
       </div>

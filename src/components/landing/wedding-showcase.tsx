@@ -71,17 +71,18 @@ export function WeddingShowcase() {
                 "📅 Live schedule + venue map",
                 "🎉 RSVP tracking dashboard",
               ].map((f) => (
-                <div
-                  key={f}
-                  className="text-xs text-white/55"
-                >
+                <div key={f} className="text-xs text-white/55">
                   <span className="text-gold text-[10px]">✦ </span>
                   {f}
                 </div>
               ))}
             </div>
           </div>
-          <Button size="lg" className="w-full mt-4 text-sm">
+          <Button
+            size="lg"
+            className="w-full mt-4 text-sm"
+            onClick={() => window.location.href = "/wedding-planner"}
+          >
             Create Wedding Page &rarr;
           </Button>
         </div>

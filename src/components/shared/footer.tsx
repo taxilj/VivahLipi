@@ -1,17 +1,31 @@
+import Link from "next/link"
 import { Ornament } from "./ornament"
 
 const footerLinks = [
   {
     title: "Product",
-    links: ["Biodata", "Wedding Planner", "Pricing", "Templates"],
+    links: [
+      { label: "Biodata", href: "/signup" },
+      { label: "Wedding Planner", href: "/wedding-planner" },
+      { label: "Pricing", href: "/#pricing" },
+      { label: "Templates", href: "/templates" },
+    ],
   },
   {
     title: "Company",
-    links: ["About Us", "Blog", "Careers"],
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Blog", href: "/blog" },
+      { label: "Careers", href: "/careers" },
+    ],
   },
   {
     title: "Support",
-    links: ["Help Centre", "WhatsApp", "Privacy Policy"],
+    links: [
+      { label: "Help Centre", href: "/help" },
+      { label: "WhatsApp", href: "https://wa.me/919876543210" },
+      { label: "Privacy Policy", href: "/privacy" },
+    ],
   },
 ]
 
@@ -39,14 +53,27 @@ export function Footer() {
                   {group.title}
                 </div>
                 <div className="space-y-3">
-                  {group.links.map((link) => (
-                    <div
-                      key={link}
-                      className="text-sm text-white/50 hover:text-white/80 cursor-pointer transition-colors"
-                    >
-                      {link}
-                    </div>
-                  ))}
+                  {group.links.map((link) =>
+                    link.href.startsWith("http") ? (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-sm text-white/50 hover:text-white/80 cursor-pointer transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        key={link.label}
+                        href={link.href}
+                        className="block text-sm text-white/50 hover:text-white/80 cursor-pointer transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    )
+                  )}
                 </div>
               </div>
             ))}
@@ -55,7 +82,14 @@ export function Footer() {
 
         <div className="border-t border-white/5 pt-7 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/35">
           <span>© 2026 VivahLipi. Made with ❤️ in India.</span>
-          <span className="text-gold/70">vivahlipi.in</span>
+          <a
+            href="https://vivahlipi.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gold/70 hover:text-gold transition-colors"
+          >
+            vivahlipi.in
+          </a>
         </div>
       </div>
     </footer>

@@ -4,7 +4,18 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Ornament } from "@/components/shared/ornament"
 
+const WA_SHARE_URL = "https://wa.me/?text=" + encodeURIComponent(
+  "Check out my premium wedding biodata on VivahLipi! ✨ Create yours at https://vivahlipi.in"
+)
+
 export function WhatsAppSection() {
+  const handleWhatsApp = () => window.open(WA_SHARE_URL, "_blank")
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText("https://vivahlipi.in")
+      .then(() => alert("Link copied to clipboard!"))
+  }
+
   return (
     <section className="section-padding bg-white relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
@@ -35,21 +46,25 @@ export function WhatsAppSection() {
 
         <div className="flex flex-wrap justify-center gap-8 mb-12">
           {[
-            { icon: "🔗", label: "Copy Link", desc: "Share anywhere" },
-            { icon: "💬", label: "WhatsApp", desc: "Direct share" },
-            { icon: "📱", label: "Preview", desc: "Mobile optimized" },
+            { icon: "🔗", label: "Copy Link", desc: "Share anywhere", action: handleCopyLink },
+            { icon: "💬", label: "WhatsApp", desc: "Direct share", action: handleWhatsApp },
+            { icon: "📱", label: "Preview", desc: "Mobile optimized", action: () => document.getElementById("preview")?.scrollIntoView({ behavior: "smooth" }) },
           ].map((item) => (
-            <div key={item.label} className="text-center">
-              <div className="w-14 h-14 rounded-2xl bg-cream border border-gold/30 flex items-center justify-center text-2xl mx-auto mb-3">
+            <button
+              key={item.label}
+              onClick={item.action}
+              className="text-center group cursor-pointer"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-cream border border-gold/30 flex items-center justify-center text-2xl mx-auto mb-3 group-hover:border-gold/60 group-hover:shadow-gold transition-all duration-200">
                 {item.icon}
               </div>
               <div className="text-sm font-semibold text-charcoal">{item.label}</div>
               <div className="text-xs text-muted mt-0.5">{item.desc}</div>
-            </div>
+            </button>
           ))}
         </div>
 
-        <Button variant="wa" size="xl">
+        <Button variant="wa" size="xl" onClick={handleWhatsApp}>
           💬 Share on WhatsApp
         </Button>
       </motion.div>
