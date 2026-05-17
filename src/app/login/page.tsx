@@ -1,66 +1,94 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { loginUser } from "@/lib/auth"
 import { Ornament } from "@/components/shared/ornament"
 
 export default function LoginPage() {
+  const router = useRouter()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError("")
+    setLoading(true)
+    await new Promise((r) => setTimeout(r, 600))
+    const result = loginUser(email, password)
+    setLoading(false)
+    if (result.ok) {
+      router.push("/dashboard")
+    } else {
+      setError(result.error || "Login failed")
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-cream flex items-center justify-center px-6 py-20">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-10">
-          <Link href="/" className="inline-flex items-center gap-2.5 mb-6">
-            <Ornament color="#ab3500" size={16} />
-            <span className="font-serif text-2xl font-bold text-saffron">VivahLipi</span>
-          </Link>
-          <h1 className="font-serif text-3xl md:text-4xl font-bold text-charcoal mb-2">
-            Welcome Back
-          </h1>
-          <p className="text-muted text-sm">Sign in to your account</p>
+    <div className="min-h-screen bg-cream flex flex-col items-center justify-center px-6 py-12">
+      <Link href="/" className="mb-8">
+        <div className="inline-flex items-center gap-2">
+          <Ornament color="#ab3500" size={14} />
+          <span className="font-serif text-xl font-bold text-saffron">VivahLipi</span>
         </div>
+      </Link>
 
-        <div className="glass-card p-8 md:p-10 space-y-6">
-          <div className="space-y-5">
-            <div>
-              <label className="block text-xs font-bold tracking-wide uppercase text-charcoal/70 mb-1.5">
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="you@example.com"
-                className="w-full h-12 px-4 rounded-xl border border-gold/20 bg-white/60 text-charcoal text-sm placeholder:text-muted/30 focus:outline-none focus:border-saffron/50 focus:ring-2 focus:ring-saffron/10 transition-all"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-bold tracking-wide uppercase text-charcoal/70 mb-1.5">
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="••••••••"
-                className="w-full h-12 px-4 rounded-xl border border-gold/20 bg-white/60 text-charcoal text-sm placeholder:text-muted/30 focus:outline-none focus:border-saffron/50 focus:ring-2 focus:ring-saffron/10 transition-all"
-              />
-            </div>
+      <div className="w-full max-w-sm bg-white border border-gold/30 rounded-3xl p-8 shadow-card">
+        <h1 className="font-serif text-2xl font-bold text-charcoal mb-1 text-center">Welcome Back</h1>
+        <p className="text-sm text-muted text-center mb-8">Sign in to your account</p>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3 mb-5">
+            {error}
           </div>
+        )}
 
-          <button className="w-full h-12 rounded-full bg-saffron text-white font-semibold text-sm hover:bg-saffron-dark transition-all shadow-[0_12px_36px_rgba(171,53,0,0.25)] hover:shadow-[0_16px_48px_rgba(171,53,0,0.35)] hover:-translate-y-0.5 active:translate-y-0">
-            Login
-          </button>
-
-          <p className="text-center text-xs text-muted">
-            Don&apos;t have an account?{" "}
-            <Link href="/signup" className="text-saffron font-semibold hover:underline">
-              Sign up
-            </Link>
-          </p>
-        </div>
-
-        <div className="text-center mt-8">
-          <Link
-            href="/"
-            className="text-xs text-muted hover:text-charcoal transition-colors"
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div>
+            <label className="block text-xs font-semibold text-charcoal mb-1.5 tracking-wide">Email</label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              className="w-full px-4 py-3 border border-gold/30 rounded-xl text-sm text-charcoal bg-white focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-all"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-charcoal mb-1.5 tracking-wide">Password</label>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="w-full px-4 py-3 border border-gold/30 rounded-xl text-sm text-charcoal bg-white focus:border-gold focus:ring-1 focus:ring-gold/30 outline-none transition-all"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full mt-2 rounded-full bg-saffron text-white font-semibold py-3.5 text-sm hover:bg-saffron-dark transition-all shadow-[0_10px_28px_rgba(171,53,0,0.25)] disabled:opacity-60"
           >
-            ← Back to Home
+            {loading ? "Signing in..." : "Login"}
+          </button>
+        </form>
+
+        <p className="text-xs text-muted text-center mt-6">
+          Don&apos;t have an account?{" "}
+          <Link href="/signup" className="text-saffron font-semibold hover:underline">
+            Sign up
           </Link>
-        </div>
+        </p>
       </div>
+
+      <Link href="/" className="text-xs text-muted mt-8 hover:text-charcoal transition-colors">
+        ← Back to Home
+      </Link>
     </div>
   )
 }

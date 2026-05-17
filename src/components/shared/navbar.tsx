@@ -6,6 +6,8 @@ import { Menu, X } from "lucide-react"
 import { Logo } from "./logo"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { getSession, isLoggedIn, logoutUser } from "@/lib/auth"
+import { useRouter } from "next/navigation"
 
 const links = [
   { label: "Features", href: "#features" },
@@ -14,8 +16,17 @@ const links = [
 ]
 
 export function Navbar() {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [userName, setUserName] = useState("")
+
+  useEffect(() => {
+    setLoggedIn(isLoggedIn())
+    const session = getSession()
+    if (session) setUserName(session.name)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -29,6 +40,13 @@ export function Navbar() {
       const el = document.querySelector(href)
       el?.scrollIntoView({ behavior: "smooth" })
     }
+  }
+
+  const handleLogout = () => {
+    logoutUser()
+    setLoggedIn(false)
+    setUserName("")
+    router.push("/")
   }
 
   return (
@@ -56,17 +74,36 @@ export function Navbar() {
               {l.label}
             </a>
           ))}
-          <Link
-            href="/login"
-            className="text-sm text-saffron font-semibold hover:text-saffron-dark transition-colors"
-          >
-            Login
-          </Link>
-          <Link href="/signup" passHref legacyBehavior>
-            <Button asChild size="md">
-              <a>Create Biodata</a>
-            </Button>
-          </Link>
+          {loggedIn ? (
+            <>
+              <Link
+                href="/dashboard"
+                className="text-sm text-charcoal/80 font-medium hover:text-saffron transition-colors"
+              >
+                {userName}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="text-sm text-muted hover:text-saffron font-medium transition-colors"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="text-sm text-saffron font-semibold hover:text-saffron-dark transition-colors"
+              >
+                Login
+              </Link>
+              <Link href="/signup" passHref legacyBehavior>
+                <Button asChild size="md">
+                  <a>Create Biodata</a>
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
 
         <button
@@ -100,18 +137,38 @@ export function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <Link
-                href="/login"
-                className="text-sm text-saffron font-semibold py-2"
-                onClick={() => setOpen(false)}
-              >
-                Login
-              </Link>
-              <Link href="/signup" passHref legacyBehavior>
-                <Button asChild size="lg" className="w-full">
-                  <a onClick={() => setOpen(false)}>Create Biodata</a>
-                </Button>
-              </Link>
+              {loggedIn ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="text-sm font-semibold text-saffron py-2"
+                    onClick={() => setOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={() => { handleLogout(); setOpen(false) }}
+                    className="text-sm text-muted text-left py-2"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="text-sm text-saffron font-semibold py-2"
+                    onClick={() => setOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link href="/signup" passHref legacyBehavior>
+                    <Button asChild size="lg" className="w-full">
+                      <a onClick={() => setOpen(false)}>Create Biodata</a>
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}
