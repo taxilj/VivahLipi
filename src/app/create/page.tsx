@@ -2,22 +2,31 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { registerUser } from "@/lib/auth"
 import { Ornament } from "@/components/shared/ornament"
 
 export default function CreatePage() {
+  const router = useRouter()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-      window.location.href = "/dashboard"
-    }, 1000)
+    await new Promise((r) => setTimeout(r, 500))
+    const result = registerUser(name, email, phone, password)
+    setLoading(false)
+    if (result.ok) {
+      router.push("/login")
+    } else {
+      setError(result.error || "Registration failed")
+    }
   }
 
   return (
@@ -32,6 +41,10 @@ export default function CreatePage() {
       <div className="w-full max-w-sm bg-white border border-gold/30 rounded-3xl p-8 shadow-card">
         <h1 className="font-serif text-2xl font-bold text-charcoal mb-1 text-center">Create Your Biodata</h1>
         <p className="text-sm text-muted text-center mb-8">Apni shaadi website ₹999 maa</p>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3 mb-5">{error}</div>
+        )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>

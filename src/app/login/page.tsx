@@ -2,20 +2,29 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { loginUser } from "@/lib/auth"
 import { Ornament } from "@/components/shared/ornament"
 
 export default function LoginPage() {
+  const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError("")
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-      window.location.href = "/dashboard"
-    }, 800)
+    await new Promise((r) => setTimeout(r, 500))
+    const result = loginUser(email, password)
+    setLoading(false)
+    if (result.ok) {
+      router.push("/dashboard")
+    } else {
+      setError(result.error || "Login failed")
+    }
   }
 
   return (
@@ -30,6 +39,10 @@ export default function LoginPage() {
       <div className="w-full max-w-sm bg-white border border-gold/30 rounded-3xl p-8 shadow-card">
         <h1 className="font-serif text-2xl font-bold text-charcoal mb-1 text-center">Welcome Back</h1>
         <p className="text-sm text-muted text-center mb-8">Login to your VivahLipi account</p>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3 mb-5">{error}</div>
+        )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
@@ -46,9 +59,7 @@ export default function LoginPage() {
           </div>
           <div className="flex justify-end">
             <a href="#" onClick={(e) => { e.preventDefault(); alert("Reset link sent to your email!") }}
-              className="text-xs text-saffron font-semibold hover:underline">
-              Forgot password?
-            </a>
+              className="text-xs text-saffron font-semibold hover:underline">Forgot password?</a>
           </div>
           <button type="submit" disabled={loading}
             className="w-full mt-1 rounded-full bg-saffron text-white font-semibold py-3.5 text-sm hover:bg-saffron-dark transition-all shadow-[0_10px_28px_rgba(171,53,0,0.25)] disabled:opacity-60">
