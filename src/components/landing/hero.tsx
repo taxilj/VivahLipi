@@ -5,10 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Ornament } from "@/components/shared/ornament"
 
 export function Hero() {
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
-  }
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-cream pt-24 md:pt-0">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -61,10 +57,10 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mb-8">
-              <Button size="xl" className="text-base" onClick={() => window.location.href = "/create"}>
+              <Button size="xl" className="text-base" onClick={() => window.location.href = "/signup"}>
                 ✦ Get Started Free
               </Button>
-              <Button variant="outline" size="lg" onClick={() => scrollTo("preview")}>
+              <Button variant="outline" size="lg" onClick={() => window.location.href = "/ananya-sharma"}>
                 View Sample &rarr;
               </Button>
             </div>

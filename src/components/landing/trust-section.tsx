@@ -53,7 +53,7 @@ export function TrustSection() {
           Join 500+ families who trust VivahLipi. Your story starts here.
         </p>
         <button
-          onClick={() => window.location.href = "/create"}
+          onClick={() => window.location.href = "/signup"}
           className="inline-flex items-center justify-center rounded-full bg-saffron text-white font-semibold px-8 py-3 text-sm hover:bg-saffron-dark transition-all shadow-[0_12px_36px_rgba(171,53,0,0.25)]"
         >
           Create Now

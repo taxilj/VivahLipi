@@ -12,7 +12,7 @@ const cards = [
     cta: "Create Biodata →",
     price: "from ₹499",
     saffron: false,
-    href: "/create",
+    href: "/signup",
   },
   {
     icon: "🎊",
@@ -21,7 +21,7 @@ const cards = [
     cta: "Plan Wedding →",
     price: null,
     saffron: true,
-    href: "/wedding-planner",
+    href: "/dashboard",
   },
 ]
 

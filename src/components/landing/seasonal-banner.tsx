@@ -15,7 +15,7 @@ export function SeasonalBanner() {
         <span className="text-xs md:text-sm text-charcoal/80 font-medium">
           Shaadi Season 2025-26 —{" "}
           <a
-            href="/create"
+            href="/signup"
             className="text-saffron font-semibold hover:underline"
           >
             Create your biodata now →

@@ -5,8 +5,15 @@ const footerLinks = [
   {
     title: "Product",
     links: [
-      { label: "Biodata", href: "/create" },
+      { label: "Biodata", href: "/signup" },
       { label: "Pricing", href: "/#pricing" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "Blog", href: "/blog" },
+      { label: "About", href: "/about" },
     ],
   },
   {

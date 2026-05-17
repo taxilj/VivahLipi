@@ -37,7 +37,7 @@ export function FinalCTA() {
               variant="gold"
               size="xl"
               className="text-base"
-              onClick={() => window.location.href = "/create"}
+              onClick={() => window.location.href = "/signup"}
             >
               ✦ Create Your Biodata Now
             </Button>
